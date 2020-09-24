@@ -1,16 +1,4 @@
 [[package]]
-category = "main"
-description = "Iteratively adjust text position in matplotlib plots to minimize overlaps"
-name = "adjusttext"
-optional = false
-python-versions = "*"
-version = "0.7.3"
-
-[package.dependencies]
-matplotlib = "*"
-numpy = "*"
-
-[[package]]
 category = "dev"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 name = "appdirs"
@@ -325,14 +313,11 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.2.0"
 
 [metadata]
-content-hash = "ea0857456dac1a8b3572c842f627f880b86ccf41675e9524994f0b9bf1b249e7"
+content-hash = "791511740a2580603c5018ac3a3b4bfb50827fa7ee004e0f1179c3fcd0735de1"
 lock-version = "1.0"
 python-versions = "^3.8"
 
 [metadata.files]
-adjusttext = [
-    {file = "adjustText-0.7.3.tar.gz", hash = "sha256:b90e275a95b4d980cbbac7967914b8d66477c09bc346a0b3c9e2125bba664b06"},
-]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},

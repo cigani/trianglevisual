@@ -20,8 +20,8 @@ class TrianglePlot:
         self.margin = margin
         self.n = n
         self.T = None
-        self.v = data.rename(columns=lambda x: x.lower())[data_column]
-        self.axes = data.rename(columns=lambda x: x.lower()).drop(columns=[data_column])
+        self.v = data.rename(columns=lambda x: x.lower())[data_column.lower()]
+        self.axes = data.rename(columns=lambda x: x.lower()).drop(columns=[data_column.lower()])
         self.fig, self.ax = plt.subplots(1)
         self.ax.set_axis_off()
 
@@ -55,16 +55,16 @@ class TrianglePlot:
         self.plot_ticks(right, left, tick(right - top), offset=(0, -0.04))
         self.plot_ticks(left, top, tick(left - right), offset=(-0.06, -0.0))
         self.plot_ticks(top, right, tick(top - left))
-        t_name = self.c.name.capitalize()
-        l_name = self.a.name.capitalize()
-        r_name = self.b.name.capitalize()
+        tn = self.c.name.capitalize()
+        ln = self.a.name.capitalize()
+        rn = self.b.name.capitalize()
 
-        self.annotate(t_name, [0.5, 1], [0.5, 1.09])
-        self.annotate(l_name, [0, 0], [-0.04, 0.02])
-        self.annotate(r_name, [1, 0], [1.04, 0.02])
-        self.annotate(f'{r_name}-{l_name}', [0.5, 0], [0.5, -0.09])
-        self.annotate(f'{r_name}-{t_name}', [0.72, 0.5], [0.9, 0.55])
-        self.annotate(f'{l_name}-{r_name}', [0.2, 0.5], [0.1, 0.55])
+        self.annotate(tn, [0.5, 1], [0.5, 1.09])
+        self.annotate(ln, [0, 0], [-0.04, 0.02])
+        self.annotate(rn, [1, 0], [1.04, 0.02])
+        self.annotate(f'{ln}-{rn}', [0.5, 0], [0.5, -0.09])
+        self.annotate(f'{rn}-{tn}', [0.72, 0.5], [0.9, 0.55])
+        self.annotate(f'{ln}-{tn}', [0.2, 0.5], [0.1, 0.55])
         plt.tricontourf(self.x, self.y, self.T.triangles, self.v)
         corners = np.array([[0, 0], [1, 0], [0.5, np.sqrt(3) * 0.576]])
         triangle = tri.Triangulation(corners[:, 0], corners[:, 1])
