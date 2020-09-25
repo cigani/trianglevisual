@@ -1,8 +1,25 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter.messagebox import showinfo
+
 from nrkvisual.visual.plotting import TrianglePlot
 from pandas import read_excel
 import io
+
+
+class Popup:
+    def __init__(self, parent, text):
+        window = Toplevel(parent)
+        label = Label(window, text=text)
+        label.pack(fill='x', padx=50, pady=5)
+        button_close = Button(window, text="Close", command=window.destroy)
+        button_close.pack(fill='x')
+        window.mainloop()
+
+
+
+def popup_showinfo(text):
+    showinfo("ShowInfo", text)
 
 
 class EntryBar(Frame):
@@ -79,8 +96,12 @@ def c(file, root, columns):
     for f in file:
         data, col = handle_data(f, columns)
         for frame in data:
-            a = TrianglePlot(data=frame, data_column=list(filter(lambda x: x[0] == 'Data', col))[0][1])
-            a.plot()
+            if frame.shape[1] < 4:
+                Popup(root,
+                      text=f'We only found the following valid columns {frame.columns.values} - You selected the following columns {col}')
+            else:
+                a = TrianglePlot(data=frame, data_column=list(filter(lambda x: x[0] == 'Data', col))[0][1])
+                a.plot()
     root.destroy()
 
 

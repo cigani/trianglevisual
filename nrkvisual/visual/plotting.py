@@ -37,9 +37,15 @@ class TrianglePlot:
         return reduce(mFunction, series)
 
     def cords(self):
+        self.axes = self.normalize(self.axes)
         self.a = self.axes[self.axes.columns[0]]
         self.b = self.axes[self.axes.columns[1]]
         self.c = self.axes[self.axes.columns[2]]
+
+    def normalize(self, df):
+        if (df.sum(axis=1) > 1.5).any(): # Accounting for input errors
+            df = df.div(100)
+        return df
 
     def triangle(self):
         under = self.chain(Series.add, [self.a, self.b, self.c])
@@ -71,7 +77,6 @@ class TrianglePlot:
         refiner = tri.UniformTriRefiner(triangle)
         trimesh = refiner.refine_triangulation(subdiv=4)
         plt.triplot(trimesh, "k--")
-        # cax = plt.axes([0.1, 0.25, 0.055, 0.6])
         plt.colorbar(ax=self.ax, shrink=0.6, aspect=10, format="%.3f")
         self.fig.tight_layout()
 
@@ -84,7 +89,7 @@ class TrianglePlot:
         x = np.vstack((x, x + tick[0]))
         y = start[1] * (1 - r) + stop[1] * r
         y = np.vstack((y, y + tick[1]))
-        plt.plot(x, y, "k", lw=1)
+        plt.plot(x, y, "k", lw=0.5)
         # add tick labels
         for xx, yy, rr in zip(x[1], y[1], r):
             plt.text(xx + offset[0], yy + offset[1], f"{round(rr, 1)}")
